@@ -1,0 +1,65 @@
+数字图像处理第一次作业代码 电信钱61 杨玙琦 2160300194
+灰度级分级
+a=imread("lena.bmp")
+p1=uint8(2^1),a_1=(a/p1)*p1
+p2=uint8(2^2),a_2=(a/p2)*p2
+p3=uint8(2^3),a_3=(a/p3)*p3
+p4=uint8(2^4),a_4=(a/p4)*p4
+p5=uint8(2^5),a_5=(a/p5)*p5
+p6=uint8(2^6),a_6=(a/p6)*p6
+p7=uint8(2^7),a_7=(a/p7)*p7
+p8=uint8(2^8),a_8=(a/p8)*p8
+subplot(3,4,1),imshow(a)
+subplot(3,4,5),imshow(a_1)
+subplot(3,4,6),imshow(a_2)
+subplot(3,4,7),imshow(a_3)
+subplot(3,4,8),imshow(a_4)
+subplot(3,4,9),imshow(a_5)
+subplot(3,4,10),imshow(a_6)
+subplot(3,4,11),imshow(a_7)
+subplot(3,4,12),imshow(a_8)
+
+计算均值方差
+a=imread("lena.bmp");
+a=double(a);
+[m,n]=size(a);
+s=0;
+for x=1:m
+    for y=1:n
+        s=s+a(x,y);
+    end
+end
+t=s/(m*n);
+for x=1:m
+    for y=1:n
+        s=s+(t-a(x,y))^2;
+    end
+end
+p=s/(m*n-1)
+
+插值法放大图像
+a=imread("lena.bmp");
+a0=imresize(a,[2048,2048]);
+a1=imresize(a,[2048,2048],"nearest");
+a2=imresize(a,[2048,2048],"bilinear");
+a3=imresize(a,[2048,2048],"bicubic");
+figure,imshow(a)
+figure,imshow(a0)
+figure,imshow(a1)
+figure,imshow(a2)
+figure,imshow(a3)
+
+水平错切、旋转、插值
+a=imread("lena.bmp");
+t=[1 0 0;1.5 1 0;0 0 1];
+tr=maketform("affine",t);
+b=imtransform(a,tr);
+m=imrotate(b,30);
+c1=imresize(m,[2048,2048],"nearest");
+c2=imresize(m,[2048,2048],"bilinear");
+c3=imresize(m,[2048,2048],"bicubic");
+figure,imshow(a);
+figure,imshow(b);
+figure,imshow(c1);
+figure,imshow(c2);
+figure,imshow(c3);
